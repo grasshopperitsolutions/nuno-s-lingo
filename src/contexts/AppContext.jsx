@@ -72,8 +72,17 @@ const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [lang, setLang] = useState("us-en");
+  const [alert, setAlert] = useState({ show: false, type: "", message: "" });
   
   const t = translations[lang];
+
+  const showAlert = (type, message) => {
+    setAlert({ show: true, type, message });
+  };
+
+  const closeAlert = () => {
+    setAlert({ ...alert, show: false });
+  };
 
   return (
     <AppContext.Provider value={{ 
@@ -82,7 +91,10 @@ export const AppProvider = ({ children }) => {
       lang, 
       setLang, 
       t,
-      translations 
+      translations,
+      alert,
+      showAlert,
+      closeAlert
     }}>
       {children}
     </AppContext.Provider>

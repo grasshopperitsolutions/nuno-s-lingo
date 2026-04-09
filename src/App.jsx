@@ -9,9 +9,10 @@ import TermsPage from "./pages/TermsPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import ContactPage from "./pages/ContactPage";
 import BarcelosRooster from "./components/BarcelosRooster";
+import AlertMessage from "./components/Alert";
 
 const AppLayout = () => {
-  const { isDarkMode } = useAppContext();
+  const { isDarkMode, alert, closeAlert } = useAppContext();
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -36,6 +37,7 @@ const AppLayout = () => {
           transform: translate(-50%, -50%);
         }
       `}</style>
+      <AlertMessage alert={alert} onClose={closeAlert} />
 
       {/* Custom Barcelos Rooster Cursor */}
       <div
