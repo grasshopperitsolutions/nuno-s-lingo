@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&display=swap');
+
+* {
+  font-family: 'Outfit', sans-serif;
+}
+
+/* Neo-Brutalist Shadows */
+.neo-shadow-light { box-shadow: 6px 6px 0px 0px #0f172a; }
+.neo-shadow-dark { box-shadow: 6px 6px 0px 0px #facc15; }
+
+.hover-neo-light:hover { 
+  box-shadow: 10px 10px 0px 0px #0f172a; 
+  transform: translate(-4px, -4px); 
+}
+.hover-neo-dark:hover { 
+  box-shadow: 10px 10px 0px 0px #facc15; 
+  transform: translate(-4px, -4px); 
+}
+
+/* Wacky Animations */
+.float-1 { animation: float 4s ease-in-out infinite; }
+.float-2 { animation: float 6s ease-in-out infinite reverse; }
+.float-3 { animation: float 5s ease-in-out infinite 1s; }
+
+.wiggle-hover:hover { animation: wiggle 0.4s ease-in-out infinite; }
+.pulse-slow { animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  width: 100%;
+}
+.marquee-content {
+  display: inline-block;
+  animation: marquee 15s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(3deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-5deg) scale(1.05); }
+  50% { transform: rotate(5deg) scale(1.05); }
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
