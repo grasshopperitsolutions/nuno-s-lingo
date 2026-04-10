@@ -10,7 +10,6 @@ import PrivacyPage from "./pages/PrivacyPage";
 import ContactPage from "./pages/ContactPage";
 import BarcelosRooster from "./components/BarcelosRooster";
 import AlertMessage from "./components/Alert";
-import LanguageRouter from "./components/LanguageRouter";
 
 const AppLayout = () => {
   const { isDarkMode, alert, closeAlert } = useAppContext();
@@ -54,12 +53,12 @@ const AppLayout = () => {
       >
       <Header />
       <Routes>
-        <Route path="/:lang" element={<LanguageRouter><HomePage /></LanguageRouter>} />
-        <Route path="/:lang/login" element={<LanguageRouter><LoginPage /></LanguageRouter>} />
-        <Route path="/:lang/terms" element={<LanguageRouter><TermsPage /></LanguageRouter>} />
-        <Route path="/:lang/privacy" element={<LanguageRouter><PrivacyPage /></LanguageRouter>} />
-        <Route path="/:lang/contact" element={<LanguageRouter><ContactPage /></LanguageRouter>} />
-        <Route path="*" element={<LanguageRouter><HomePage /></LanguageRouter>} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/terms" element={<TermsPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="*" element={<HomePage />} />
       </Routes>
       <Footer />
       </div>

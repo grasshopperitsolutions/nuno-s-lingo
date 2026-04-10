@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found</title>
+  <script>
+    // GitHub Pages SPA redirect fix
+    (function() {
+      var path = window.location.pathname;
+      var hash = window.location.hash;
+      var search = window.location.search;
+      
+      // Redirect to root with path in hash for SPA routing
+      window.location.replace('/' + '?p=' + encodeURIComponent(path) + search + hash);
+    })();
+  </script>
+</head>
+<body>
+  <noscript>
+    <p>Please enable JavaScript to view this site.</p>
+  </noscript>
+</body>
+</html>

@@ -4,7 +4,7 @@ import { useAppContext } from "../contexts/AppContext";
 import BarcelosRooster from "./BarcelosRooster";
 
 const Footer = () => {
-  const { isDarkMode, t } = useAppContext();
+  const { isDarkMode } = useAppContext();
 
   return (
     <footer
@@ -17,10 +17,10 @@ const Footer = () => {
                 <BarcelosRooster className="w-8 h-8" />
             </div>
           <span className="text-xl uppercase tracking-tighter">
-            {t.brand}
+            Nuno's Lingo
           </span>
         </div>
-        <p className="opacity-70">{t.footer}</p>
+        <p className="opacity-70">© 2026 Nuno’s Lingo. Built for European Portuguese learners.</p>
         <div className="flex space-x-6">
           <Link
             to="/privacy"

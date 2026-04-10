@@ -3,10 +3,9 @@ import { Sun, Moon } from "lucide-react";
 import { useAppContext } from "../contexts/AppContext";
 import { Link } from "react-router-dom";
 import BarcelosRooster from "./BarcelosRooster";
-import LanguageSelector from "./LanguageSelector";
 
 const Header = () => {
-  const { isDarkMode, setIsDarkMode, lang, setLang, t } = useAppContext();
+  const { isDarkMode, setIsDarkMode } = useAppContext();
 
   return (
     <header
@@ -23,14 +22,11 @@ const Header = () => {
             <BarcelosRooster className="w-10 h-10" />
           </div>
           <span className="text-2xl font-black tracking-tight uppercase group-hover:text-blue-600 transition-colors">
-            {t.brand}
+            Nuno's Lingo
           </span>
         </Link>
 
         <div className="flex items-center space-x-3 md:space-x-6">
-          {/* Language Picker */}
-          <LanguageSelector />
-
           {/* Theme Toggle */}
           <button
             onClick={() => setIsDarkMode(!isDarkMode)}
@@ -54,7 +50,7 @@ const Header = () => {
                 : "bg-blue-600 border-slate-900 text-white hover-neo-light"
             }`}
           >
-            {t.login}
+            Login
           </Link>
         </div>
       </div>

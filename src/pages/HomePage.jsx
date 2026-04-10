@@ -4,7 +4,7 @@ import { useAppContext } from "../contexts/AppContext";
 import FeatureCard from "../components/FeatureCard";
 
 const HomePage = () => {
-  const { isDarkMode, t } = useAppContext();
+  const { isDarkMode } = useAppContext();
 
   return (
     <>
@@ -34,18 +34,18 @@ const HomePage = () => {
           </div>
 
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-black mb-8 tracking-tighter leading-[0.9]">
-            <span className="block">{t.heroTitlePart1}</span>
+            <span className="block">Ask AI</span>
             <span
               className={`block my-2 mx-auto w-fit px-4 border-4 -rotate-2 hover:rotate-2 transition-transform duration-300
               ${isDarkMode ? "bg-yellow-400 text-slate-900 border-slate-900" : "bg-blue-600 text-white border-slate-900 neo-shadow-light"}`}
             >
-              {t.heroTitlePart2}
+              Everything
             </span>
-            <span className="block">{t.heroTitlePart3}</span>
+            <span className="block">about Portuguese</span>
           </h1>
 
           <p className="text-xl md:text-3xl font-semibold mb-12 max-w-3xl mx-auto leading-relaxed opacity-90">
-            {t.heroSub}
+            The first platform that teaches you European Portuguese from any language or dialect you speak. AI-powered, human-supported.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-6 sm:space-y-0 sm:space-x-6">
@@ -57,7 +57,7 @@ const HomePage = () => {
                   : "bg-yellow-400 border-slate-900 text-slate-900 hover-neo-light"
               }`}
             >
-              {t.cta}
+              Start Learning Now
               <ArrowRight className="ml-3 w-8 h-8 group-hover:translate-x-3 transition-transform" />
             </button>
           </div>
@@ -95,25 +95,25 @@ const HomePage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <FeatureCard
             icon={Mic}
-            title={t.tutor}
+            title="24/7 AI Voice Tutor"
             delay="0s"
             color="bg-yellow-400 text-slate-900"
           />
           <FeatureCard
             icon={MessageSquare}
-            title={t.dictionary}
+            title="Urban Dictionary"
             delay="0.2s"
             color="bg-blue-400 text-slate-900"
           />
           <FeatureCard
             icon={Calendar}
-            title={t.scheduler}
+            title="Smart Scheduler"
             delay="0.4s"
             color="bg-pink-400 text-slate-900"
           />
           <FeatureCard
             icon={Users}
-            title={t.human}
+            title="Human Tutor Sessions"
             delay="0.6s"
             color="bg-green-400 text-slate-900"
           />
