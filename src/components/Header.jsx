@@ -1,11 +1,19 @@
 import React from "react";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, Settings, LogOut } from "lucide-react";
 import { useAppContext } from "../contexts/AppContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BarcelosRooster from "./BarcelosRooster";
 
 const Header = () => {
-  const { isDarkMode, setIsDarkMode } = useAppContext();
+  const { isDarkMode, setIsDarkMode, user, logoutUser } = useAppContext();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    const result = await logoutUser();
+    if (result?.success) {
+      navigate("/");
+    }
+  };
 
   return (
     <header
@@ -15,7 +23,7 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
         {/* Logo */}
         <Link
-          to="/"
+          to={user ? "/dashboard" : "/"}
           className="flex items-center space-x-3 group cursor-pointer"
         >
           <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center border-2 border-slate-900 shadow-[4px_4px_0px_0px_#facc15] group-hover:scale-110 group-hover:rotate-12 transition-transform">
@@ -26,7 +34,7 @@ const Header = () => {
           </span>
         </Link>
 
-        <div className="flex items-center space-x-3 md:space-x-6">
+        <div className="flex items-center space-x-3 md:space-x-4">
           {/* Theme Toggle */}
           <button
             onClick={() => setIsDarkMode(!isDarkMode)}
@@ -40,18 +48,48 @@ const Header = () => {
             )}
           </button>
 
-          {/* Login Button */}
-          <Link
-            to="/login"
-            className={`hidden md:flex px-8 py-3 rounded-full font-black uppercase tracking-wider border-2 transition-all active:scale-95
-            ${
-              isDarkMode
-                ? "bg-blue-600 border-slate-900 text-white hover-neo-dark"
-                : "bg-blue-600 border-slate-900 text-white hover-neo-light"
-            }`}
-          >
-            Login
-          </Link>
+          {user ? (
+            /* Authenticated nav */
+            <>
+              <Link
+                to="/settings"
+                className={`hidden md:flex items-center gap-2 px-5 py-3 rounded-full font-black uppercase tracking-wider border-2 transition-all active:scale-95 hover:-translate-y-0.5
+                ${
+                  isDarkMode
+                    ? "bg-slate-700 border-slate-600 text-white shadow-[3px_3px_0px_0px_#1e293b]"
+                    : "bg-white border-slate-900 text-slate-900 shadow-[3px_3px_0px_0px_#0f172a]"
+                }`}
+              >
+                <Settings size={16} />
+                Settings
+              </Link>
+              <button
+                onClick={handleLogout}
+                className={`hidden md:flex items-center gap-2 px-5 py-3 rounded-full font-black uppercase tracking-wider border-2 transition-all active:scale-95 hover:-translate-y-0.5
+                ${
+                  isDarkMode
+                    ? "bg-slate-700 border-slate-600 text-white hover:border-rose-500 shadow-[3px_3px_0px_0px_#1e293b]"
+                    : "bg-white border-slate-900 text-slate-900 hover:border-rose-500 shadow-[3px_3px_0px_0px_#0f172a]"
+                }`}
+              >
+                <LogOut size={16} />
+                Logout
+              </button>
+            </>
+          ) : (
+            /* Guest nav */
+            <Link
+              to="/login"
+              className={`hidden md:flex px-8 py-3 rounded-full font-black uppercase tracking-wider border-2 transition-all active:scale-95
+              ${
+                isDarkMode
+                  ? "bg-blue-600 border-slate-900 text-white hover-neo-dark"
+                  : "bg-blue-600 border-slate-900 text-white hover-neo-light"
+              }`}
+            >
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </header>
