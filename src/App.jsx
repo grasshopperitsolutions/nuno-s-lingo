@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { AppProvider, useAppContext } from "./contexts/AppContext";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -61,11 +61,9 @@ const AppLayout = () => {
 
 const App = () => {
   return (
-    <Router>
-      <AppProvider>
-        <AppLayout />
-      </AppProvider>
-    </Router>
+    <AppProvider>
+      <AppLayout />
+    </AppProvider>
   );
 };
 

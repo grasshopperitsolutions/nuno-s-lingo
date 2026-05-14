@@ -6,13 +6,7 @@ import './i18n.js';
 export const createRoot = ViteReactSSG(
   {
     routes: [
-      { path: '/', Component: App },
-      { path: '/login' },
-      { path: '/terms' },
-      { path: '/privacy' },
-      { path: '/contact' },
-      { path: '/dashboard' },
-      { path: '/settings' },
+      { path: '/*', Component: App },
     ],
   },
 );
