@@ -14,7 +14,7 @@ export default [
       ".vscode/**",
       ".idea/**",
       "public/**",
-      ".vite-ssg-temp/**",
+      ".vite-react-ssg-temp/**",
       "**/*.min.js",
       "**/*.min.css",
       "**/*.log",
