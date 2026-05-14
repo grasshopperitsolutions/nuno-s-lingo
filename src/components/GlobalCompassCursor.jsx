@@ -1,4 +1,5 @@
 import { Compass } from "lucide-react";
+import PropTypes from "prop-types";
 
 const GlobalCompassCursor = ({ x, y, isDarkMode }) => {
   const rotation = (x + y) % 360;
@@ -19,6 +20,12 @@ const GlobalCompassCursor = ({ x, y, isDarkMode }) => {
       </div>
     </div>
   );
+};
+
+GlobalCompassCursor.propTypes = {
+  x: PropTypes.number.isRequired,
+  y: PropTypes.number.isRequired,
+  isDarkMode: PropTypes.bool.isRequired,
 };
 
 export default GlobalCompassCursor;

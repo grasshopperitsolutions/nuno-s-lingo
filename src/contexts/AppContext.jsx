@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { loginWithGoogle, logout as logoutUserService, getCurrentUser } from '../services/authService';
 import { getUserProfile } from '../services/userService';
+import PropTypes from "prop-types";
 
 const AppContext = createContext();
 
@@ -97,5 +98,8 @@ export const AppProvider = ({ children }) => {
   );
 };
 
-// eslint-disable-next-line react-refresh/only-export-components
+AppProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
 export const useAppContext = () => useContext(AppContext);

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { ChevronDown } from "lucide-react";
+import PropTypes from "prop-types";
 
 const NeoDropdown = ({
   options,
@@ -98,6 +99,21 @@ const NeoDropdown = ({
       )}
     </div>
   );
+};
+
+NeoDropdown.propTypes = {
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      label: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  onChange: PropTypes.func.isRequired,
+  icon: PropTypes.elementType,
+  isDarkMode: PropTypes.bool.isRequired,
+  className: PropTypes.string,
+  label: PropTypes.string,
 };
 
 export default NeoDropdown;

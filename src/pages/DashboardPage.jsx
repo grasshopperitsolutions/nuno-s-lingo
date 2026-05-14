@@ -14,6 +14,7 @@ import {
   Star,
   ArrowRight,
 } from "lucide-react";
+import PropTypes from "prop-types";
 
 const StatCard = ({ icon: Icon, label, value, color, isDarkMode }) => (
   <div
@@ -73,22 +74,22 @@ const DashboardPage = () => {
 
   const stats = [
     { icon: BookOpen, label: "Languages", value: "3", color: "text-blue-500" },
-    { icon: Zap,      label: "Sessions",  value: "24", color: "text-yellow-500" },
-    { icon: Flame,    label: "Day Streak", value: "7",  color: "text-rose-500" },
-    { icon: Star,     label: "Words",      value: "312", color: "text-emerald-500" },
+    { icon: Zap, label: "Sessions", value: "24", color: "text-yellow-500" },
+    { icon: Flame, label: "Day Streak", value: "7", color: "text-rose-500" },
+    { icon: Star, label: "Words", value: "312", color: "text-emerald-500" },
   ];
 
   const activity = [
-    { flag: "🇪🇸", title: "Spanish Conversation", date: "Today",     score: 92 },
-    { flag: "🇫🇷", title: "French Vocabulary",    date: "Yesterday", score: 74 },
-    { flag: "🇯🇵", title: "Japanese Basics",      date: "2 days ago", score: 58 },
+    { flag: "🇪🇸", title: "Spanish Conversation", date: "Today", score: 92 },
+    { flag: "🇫🇷", title: "French Vocabulary", date: "Yesterday", score: 74 },
+    { flag: "🇯🇵", title: "Japanese Basics", date: "2 days ago", score: 58 },
   ];
 
   const features = [
-    { icon: Mic,          title: "Voice Practice",    description: "Speak and get instant AI feedback on your pronunciation." },
-    { icon: MessageSquare,title: "AI Conversation",   description: "Chat with an AI tutor in your target language." },
-    { icon: Calendar,     title: "Daily Challenges",  description: "New exercises every day to keep your streak alive." },
-    { icon: Users,        title: "Community",         description: "Practice with native speakers and fellow learners." },
+    { icon: Mic, title: "Voice Practice", description: "Speak and get instant AI feedback on your pronunciation." },
+    { icon: MessageSquare, title: "AI Conversation", description: "Chat with an AI tutor in your target language." },
+    { icon: Calendar, title: "Daily Challenges", description: "New exercises every day to keep your streak alive." },
+    { icon: Users, title: "Community", description: "Practice with native speakers and fellow learners." },
   ];
 
   return (
@@ -193,6 +194,22 @@ const DashboardPage = () => {
       </section>
     </main>
   );
+};
+
+StatCard.propTypes = {
+  icon: PropTypes.elementType.isRequired,
+  label: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  isDarkMode: PropTypes.bool.isRequired,
+};
+
+ActivityRow.propTypes = {
+  flag: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
+  isDarkMode: PropTypes.bool.isRequired,
 };
 
 export default DashboardPage;

@@ -1,8 +1,9 @@
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import PropTypes from "prop-types";
 
 const SEOMeta = ({ title, description, path = '' }) => {
   const baseUrl = import.meta.env.VITE_SITE_URL || 'https://nunoslavi.com';
-  
+
   return (
     <Helmet>
       <html lang="en-US" />
@@ -17,11 +18,20 @@ const SEOMeta = ({ title, description, path = '' }) => {
   );
 };
 
-// eslint-disable-next-line react-refresh/only-export-components
+SEOMeta.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  path: PropTypes.string,
+};
+
 export const SEOProvider = ({ children }) => (
   <HelmetProvider>
     {children}
   </HelmetProvider>
 );
+
+SEOProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default SEOMeta;
