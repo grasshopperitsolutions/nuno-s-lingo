@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../contexts/AppContext";
 import NeoDropdown from "../components/NeoDropdown";
@@ -45,10 +45,12 @@ const SettingsPage = () => {
   );
   const [isSaving, setIsSaving] = useState(false);
 
-  // useEffect(() => {
-  //   if (user?.displayName) setDisplayName(user.displayName);
-  //   if (user?.interfaceLang) setInterfaceLang(user.interfaceLang);
-  // }, [user?.displayName, user?.interfaceLang]);
+  // Sync form fields when user profile loads from Firestore
+  useEffect(() => {
+    if (user?.displayName !== undefined) setDisplayName(user.displayName);
+    if (user?.interfaceLang)             setInterfaceLang(user.interfaceLang);
+    if (user?.theme !== undefined)       setIsDarkMode(user.theme === 'dark');
+  }, [user?.displayName, user?.interfaceLang, user?.theme, setIsDarkMode]);
 
   const handleSave = async (e) => {
     e.preventDefault();
