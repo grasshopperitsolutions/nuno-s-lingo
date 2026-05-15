@@ -126,7 +126,7 @@ export const AppProvider = ({ children }) => {
   // refreshes, custom-token re-auth, and session changes are always reflected.
   // Also loads saved preferences from localStorage on mount.
   useEffect(() => {
-    if (!auth) return; // guard for SSG build where Firebase is not initialised
+    if (!auth) return;
     const unsubscribe = auth.onAuthStateChanged(async (firebaseUser) => {
       if (firebaseUser) {
         const token = await firebaseUser.getIdToken();
@@ -154,10 +154,9 @@ export const AppProvider = ({ children }) => {
   const loginGoogle = async () => {
     try {
       const result = await loginWithGoogle();
-      if (result.success) {
-        setUser(result.user);
-        await loadUserProfile(result.user);
-      }
+      // Do NOT call setUser or loadUserProfile here — onAuthStateChanged fires
+      // immediately after signInWithCustomToken and handles both, avoiding a
+      // double render and a redundant Firestore fetch.
       return result;
     } catch (e) {
       showAlert("error", e.message);

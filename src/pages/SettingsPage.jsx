@@ -25,8 +25,30 @@ const LANGUAGE_OPTIONS = [
   { value: "fr", label: "French" },
 ];
 
+// Placeholder SVG shown when photoURL is unavailable
+const AvatarPlaceholder = ({ size = 64, className = "" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 64 64"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    aria-hidden="true"
+  >
+    <circle cx="32" cy="32" r="32" fill="#e2e8f0" />
+    <circle cx="32" cy="26" r="10" fill="#94a3b8" />
+    <ellipse cx="32" cy="50" rx="16" ry="10" fill="#94a3b8" />
+  </svg>
+);
+
+AvatarPlaceholder.propTypes = {
+  size: PropTypes.number,
+  className: PropTypes.string,
+};
+
 // Fully controlled — no internal state, no useEffect.
-// All values come from SettingsPage which re-renders whenever context user updates.
+// All values come from SettingsPage which syncs whenever context user updates.
 const SettingsForm = ({
   user,
   isDarkMode,
@@ -70,6 +92,33 @@ const SettingsForm = ({
         >
           {t("settings.profile")}
         </h2>
+
+        {/* Avatar preview */}
+        <div className="flex items-center gap-5 mb-6">
+          <div className="relative shrink-0">
+            {user?.photoURL ? (
+              <img
+                src={user.photoURL}
+                alt={user.displayName || "Profile photo"}
+                width={64}
+                height={64}
+                className="w-16 h-16 rounded-full border-4 border-slate-900 object-cover shadow-[3px_3px_0px_0px_#facc15]"
+              />
+            ) : (
+              <div className="w-16 h-16 rounded-full border-4 border-slate-900 overflow-hidden shadow-[3px_3px_0px_0px_#facc15]">
+                <AvatarPlaceholder size={64} />
+              </div>
+            )}
+          </div>
+          <div>
+            <p className={`font-black text-base ${ isDarkMode ? "text-white" : "text-slate-900" }`}>
+              {user?.displayName || "—"}
+            </p>
+            <p className={`text-xs font-bold uppercase tracking-widest ${ isDarkMode ? "text-slate-400" : "text-slate-500" }`}>
+              {user?.email || ""}
+            </p>
+          </div>
+        </div>
 
         <div className="space-y-5">
           <div>
@@ -171,6 +220,7 @@ SettingsForm.propTypes = {
     uid: PropTypes.string,
     email: PropTypes.string,
     displayName: PropTypes.string,
+    photoURL: PropTypes.string,
     interfaceLang: PropTypes.string,
   }),
   isDarkMode: PropTypes.bool.isRequired,
@@ -197,9 +247,6 @@ const SettingsPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  // Lifted form state — initialised from context user at render time.
-  // SettingsPage re-renders whenever context user updates, so these are
-  // always fresh without needing a useEffect sync.
   const [displayName, setDisplayName] = useState(user?.displayName || "");
   const [interfaceLang, setInterfaceLang] = useState(
     user?.interfaceLang || "en",
@@ -208,6 +255,19 @@ const SettingsPage = () => {
   // Only committed to global context on successful save.
   const [draftDarkMode, setDraftDarkMode] = useState(isDarkMode);
   const [isSaving, setIsSaving] = useState(false);
+
+  // Track a composite key of all context values that should reset the form.
+  // When any of these change (e.g. async profile load resolves, header theme toggle),
+  // we adjust state during render — the pattern React docs recommend instead of
+  // calling setState inside an effect.
+  const [prevSyncKey, setPrevSyncKey] = useState("");
+  const syncKey = `${user?.uid || ""}-${user?.displayName || ""}-${user?.interfaceLang || ""}-${isDarkMode}`;
+  if (syncKey !== prevSyncKey) {
+    setPrevSyncKey(syncKey);
+    if (user?.displayName) setDisplayName(user.displayName);
+    if (user?.interfaceLang) setInterfaceLang(user.interfaceLang);
+    setDraftDarkMode(isDarkMode);
+  }
 
   const handleSave = async (e) => {
     e.preventDefault();
