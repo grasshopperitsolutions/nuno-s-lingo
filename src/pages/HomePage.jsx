@@ -30,10 +30,6 @@ const HomePage = () => {
             className={`inline-flex items-center space-x-2 px-6 py-2 mb-8 font-bold border-2 rounded-full float-3
             ${isDarkMode ? "bg-slate-800 border-yellow-400 text-yellow-400" : "bg-white border-slate-900 text-slate-900 shadow-[4px_4px_0px_0px_#0f172a]"}`}
           >
-            <Sparkles
-              size={18}
-              className={isDarkMode ? "text-yellow-400" : "text-blue-600"}
-            />
             <span>{t('home.badge')}</span>
           </div>
 
