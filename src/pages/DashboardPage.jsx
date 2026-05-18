@@ -6,14 +6,18 @@ import FeatureCard from "../components/FeatureCard";
 import Loader from "../components/Loader";
 import Avatar from "../components/Avatar";
 import {
-  Mic,
-  MessageSquare,
-  Calendar,
-  Users,
+  Languages,
+  BookMarked,
+  PenLine,
+  BotMessageSquare,
+  UserRound,
+  Video,
+  BookOpen,
+  Landmark,
+  Swords,
   Settings,
   LogOut,
   Zap,
-  BookOpen,
   Flame,
   Star,
   ArrowLeft,
@@ -83,28 +87,58 @@ const DashboardPage = () => {
 
   const features = [
     {
-      icon: Mic,
-      title: t("dashboard.voice_practice"),
-      description: t("dashboard.voice_practice_desc"),
-      color: "text-purple-500",
+      icon: Languages,
+      title: "Translator",
+      description: "Instantly translate text between any two languages with context-aware AI.",
+      color: "text-sky-500",
     },
     {
-      icon: MessageSquare,
-      title: t("dashboard.ai_conversation"),
-      description: t("dashboard.ai_conversation_desc"),
+      icon: BookMarked,
+      title: "Dictionary",
+      description: "Look up words, meanings, examples, and conjugations in any language.",
+      color: "text-violet-500",
+    },
+    {
+      icon: PenLine,
+      title: "Grammar",
+      description: "Check and correct your grammar, get explanations and writing tips.",
+      color: "text-amber-500",
+    },
+    {
+      icon: BotMessageSquare,
+      title: "AI Tutor",
+      description: "Chat with an AI language tutor for practice, corrections, and feedback.",
       color: "text-blue-500",
     },
     {
-      icon: Calendar,
-      title: t("dashboard.daily_challenges"),
-      description: t("dashboard.daily_challenges_desc"),
-      color: "text-yellow-500",
+      icon: UserRound,
+      title: "Real Person Tutor",
+      description: "Book a live session with a certified native-speaker tutor.",
+      color: "text-emerald-500",
     },
     {
-      icon: Users,
-      title: t("dashboard.community"),
-      description: t("dashboard.community_desc"),
-      color: "text-emerald-500",
+      icon: Video,
+      title: "Voice Practice",
+      description: "Record yourself speaking and get AI-powered pronunciation feedback.",
+      color: "text-purple-500",
+    },
+    {
+      icon: BookOpen,
+      title: "Story Generator",
+      description: "Read and listen to AI-generated stories tailored to your level.",
+      color: "text-rose-500",
+    },
+    {
+      icon: Landmark,
+      title: "History & Culture",
+      description: "Explore the history, customs, and culture behind the language you're learning.",
+      color: "text-orange-500",
+    },
+    {
+      icon: Swords,
+      title: "Challenges",
+      description: "Test your skills with mini-games, quizzes, and daily language challenges.",
+      color: "text-yellow-500",
     },
   ];
 
@@ -233,7 +267,7 @@ const DashboardPage = () => {
             <h2 className={`text-xs font-black uppercase tracking-widest mb-4 ${
               isDarkMode ? "text-slate-400" : "text-slate-500"
             }`}>{t("dashboard.what_you_can_do")}</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {features.map((f) => (
                 <FeatureCard
                   key={f.title}
