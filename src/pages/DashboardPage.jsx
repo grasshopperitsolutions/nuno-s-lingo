@@ -58,29 +58,49 @@ StatCard.propTypes = {
 
 // ── TooltipButton ─────────────────────────────────────────────────────────────
 // A thin wrapper that adds a tooltip above any icon button.
-const TooltipButton = ({ tooltip, isDarkMode, children }) => (
-  <div className="relative group">
-    {children}
-    <div
-      role="tooltip"
-      className={[
-        "absolute bottom-[calc(100%+8px)] left-1/2 -translate-x-1/2",
-        "px-3 py-1.5 rounded-lg border-2 text-xs font-black uppercase tracking-widest whitespace-nowrap",
-        "pointer-events-none select-none",
-        "opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:translate-y-0",
-        "transition-all duration-150",
-        "bg-slate-900 border-yellow-400 text-yellow-400",
-      ].join(" ")}
-    >
-      {tooltip}
-      {/* Arrow */}
-      <span
-        className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-900"
-        aria-hidden="true"
-      />
+const TooltipButton = ({ tooltip, isDarkMode, children }) => {
+  // Tooltip theme
+  const tooltipClasses = isDarkMode
+    ? "bg-slate-900 border-yellow-400 text-yellow-400"
+    : "bg-white border-slate-900 text-slate-900";
+
+  return (
+    <div className="relative group">
+      {children}
+      <div
+        role="tooltip"
+        className={[
+          "absolute bottom-[calc(100%+8px)] left-1/2 -translate-x-1/2",
+          "px-3 py-1.5 rounded-lg border-2 text-xs font-black uppercase tracking-widest whitespace-nowrap",
+          "pointer-events-none select-none",
+          "opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:translate-y-0",
+          "transition-all duration-150",
+          tooltipClasses,
+        ].join(" ")}
+      >
+        {tooltip}
+        {/* Arrow — dark: single border span; light: two-span bordered arrow */}
+        {isDarkMode ? (
+          <span
+            className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-900"
+            aria-hidden="true"
+          />
+        ) : (
+          <>
+            <span
+              className="absolute top-full left-1/2 -translate-x-1/2 border-[5px] border-transparent border-t-slate-900"
+              aria-hidden="true"
+            />
+            <span
+              className="absolute top-[calc(100%-1px)] left-1/2 -translate-x-1/2 border-4 border-transparent border-t-white"
+              aria-hidden="true"
+            />
+          </>
+        )}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 TooltipButton.propTypes = {
   tooltip: PropTypes.string.isRequired,

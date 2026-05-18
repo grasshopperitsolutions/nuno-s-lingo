@@ -5,7 +5,7 @@ import { Loader2 } from "lucide-react";
  * FloatingActionButton — a reusable fixed-position circular FAB.
  *
  * Shows only the icon. The `label` becomes a tooltip that appears
- * on hover (above the button by default).
+ * on hover (above the button).
  *
  * Props:
  *   onClick      — handler called when the button is clicked
@@ -29,6 +29,34 @@ const FloatingActionButton = ({
 }) => {
   const isBusy = isLoading || disabled;
 
+  // Tooltip theme
+  const tooltipClasses = isDarkMode
+    ? "bg-slate-900 border-yellow-400 text-yellow-400"
+    : "bg-white border-slate-900 text-slate-900";
+
+  // Arrow: two stacked spans simulate a bordered arrow in light mode.
+  // In dark mode a single border-t is enough since bg matches the border colour.
+  const ArrowDark = () => (
+    <span
+      className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-900"
+      aria-hidden="true"
+    />
+  );
+  const ArrowLight = () => (
+    <>
+      {/* Border layer */}
+      <span
+        className="absolute top-full left-1/2 -translate-x-1/2 border-[5px] border-transparent border-t-slate-900"
+        aria-hidden="true"
+      />
+      {/* Fill layer (sits 1px above, covers border with white) */}
+      <span
+        className="absolute top-[calc(100%-1px)] left-1/2 -translate-x-1/2 border-4 border-transparent border-t-white"
+        aria-hidden="true"
+      />
+    </>
+  );
+
   return (
     <div
       className={["fixed z-40 group", position, className].filter(Boolean).join(" ")}
@@ -42,17 +70,11 @@ const FloatingActionButton = ({
           "pointer-events-none select-none",
           "opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:translate-y-0",
           "transition-all duration-150",
-          isDarkMode
-            ? "bg-slate-900 border-yellow-400 text-yellow-400"
-            : "bg-slate-900 border-yellow-400 text-yellow-400",
+          tooltipClasses,
         ].join(" ")}
       >
         {label}
-        {/* Arrow */}
-        <span
-          className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-900"
-          aria-hidden="true"
-        />
+        {isDarkMode ? <ArrowDark /> : <ArrowLight />}
       </div>
 
       {/* Button */}
