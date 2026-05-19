@@ -6,8 +6,6 @@ import FeatureCard from "../components/FeatureCard";
 import Loader from "../components/Loader";
 import Avatar from "../components/Avatar";
 import ChallengesMenu from "../components/ChallengesMenu";
-import HangmanGame from "../components/HangmanGame";
-import CrosswordsGame from "../components/CrosswordsGame";
 import {
   Languages,
   BookMarked,
@@ -115,7 +113,6 @@ const DashboardPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [selectedFeature, setSelectedFeature] = useState(null);
-  const [challengeView, setChallengeView] = useState(null);
 
   if (!user) {
     return (
@@ -138,7 +135,6 @@ const DashboardPage = () => {
 
   const handleBackToDashboard = () => {
     setSelectedFeature(null);
-    setChallengeView(null);
   };
 
   const stats = [
@@ -323,33 +319,16 @@ const DashboardPage = () => {
         </section>
       )}
 
-      {/* Challenges Menu */}
-      {selectedFeature && selectedFeature.title === t("dashboard.challenges") && !challengeView && (
+      {/* Challenges Hub */}
+      {selectedFeature && selectedFeature.title === t("dashboard.challenges") && (
         <ChallengesMenu
           isDarkMode={isDarkMode}
           onBack={handleBackToDashboard}
-          onSelect={setChallengeView}
         />
       )}
 
-      {/* Hangman Game */}
-      {challengeView === "hangman" && (
-        <HangmanGame
-          isDarkMode={isDarkMode}
-          onBack={() => setChallengeView(null)}
-        />
-      )}
-
-      {/* Crosswords Game */}
-      {challengeView === "crosswords" && (
-        <CrosswordsGame
-          isDarkMode={isDarkMode}
-          onBack={() => setChallengeView(null)}
-        />
-      )}
-
-      {/* Stats + Features — hidden when a feature or challenge is active */}
-      {!selectedFeature && !challengeView && (
+      {/* Stats + Features — hidden when a feature is active */}
+      {!selectedFeature && (
         <>
           <section>
             <h2 className={`text-xs font-black uppercase tracking-widest mb-4 ${

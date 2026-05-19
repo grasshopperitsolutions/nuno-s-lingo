@@ -1,9 +1,9 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, Trophy, XCircle } from "lucide-react";
+import { Trophy, XCircle } from "lucide-react";
 
-const CrosswordsGame = ({ isDarkMode, onBack }) => {
+const CrosswordsGame = ({ isDarkMode }) => {
   const { t } = useTranslation();
   const [grid, setGrid] = useState({
     "0-0": "",
@@ -80,22 +80,9 @@ const CrosswordsGame = ({ isDarkMode, onBack }) => {
 
   return (
     <div className="flex flex-col items-center w-full max-w-2xl mx-auto animate-in fade-in zoom-in-95">
-      <div className="w-full flex justify-between items-center mb-8">
-        <button
-          onClick={onBack}
-          className={`p-3 rounded-xl border-4 transition-all hover-neo-light active-neo ${
-            isDarkMode
-              ? "bg-slate-800 border-slate-700 text-white"
-              : "bg-white border-slate-900 text-slate-900"
-          }`}
-        >
-          <ArrowLeft size={24} />
-        </button>
-        <h2 className="text-3xl font-black uppercase tracking-tighter">
-          {t("challenges.crosswords")}
-        </h2>
-        <div className="w-12" />
-      </div>
+      <h2 className="text-3xl font-black uppercase tracking-tighter mb-8">
+        {t("challenges.crosswords")}
+      </h2>
 
       <div className="flex flex-col md:flex-row gap-12 items-center md:items-start mt-8">
         {/* The Grid */}
@@ -179,7 +166,6 @@ const CrosswordsGame = ({ isDarkMode, onBack }) => {
 
 CrosswordsGame.propTypes = {
   isDarkMode: PropTypes.bool.isRequired,
-  onBack: PropTypes.func.isRequired,
 };
 
 export default CrosswordsGame;
