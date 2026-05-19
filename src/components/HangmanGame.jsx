@@ -33,7 +33,7 @@ const HangmanGame = ({ isDarkMode }) => {
 
   return (
     <div className="flex flex-col items-center w-full max-w-2xl mx-auto animate-in fade-in zoom-in-95">
-      <h2 className="text-3xl font-black uppercase tracking-tighter mb-8">
+      <h2 className="text-xl sm:text-3xl font-black uppercase tracking-tighter mb-8">
         {t("challenges.hangman")}
       </h2>
 
@@ -78,11 +78,11 @@ const HangmanGame = ({ isDarkMode }) => {
       </div>
 
       {/* Word Display */}
-      <div className="flex gap-2 mb-8">
+      <div className="flex gap-1 sm:gap-2 mb-8">
         {word.split("").map((char, i) => (
           <div
             key={i}
-            className={`w-12 h-14 border-b-8 flex items-center justify-center text-3xl font-black ${
+            className={`w-7 sm:w-12 h-8 sm:h-14 border-b-4 sm:border-b-8 flex items-center justify-center text-xl sm:text-3xl font-black ${
               isDarkMode
                 ? "border-yellow-400 text-white"
                 : "border-slate-900 text-slate-900"

@@ -146,6 +146,12 @@ const DashboardPage = () => {
 
   const features = [
     {
+      icon: Gamepad2,
+      title: t("dashboard.challenges"),
+      description: t("dashboard.challenges_desc"),
+      color: "text-yellow-500",
+    },
+    {
       icon: Languages,
       title: t("dashboard.translator"),
       description: t("dashboard.translator_desc"),
@@ -200,12 +206,6 @@ const DashboardPage = () => {
       description: t("dashboard.history_culture_desc"),
       color: "text-orange-500",
       statusBadgeLabel: "In progress...",
-    },
-    {
-      icon: Gamepad2,
-      title: t("dashboard.challenges"),
-      description: t("dashboard.challenges_desc"),
-      color: "text-yellow-500",
     },
   ];
 
